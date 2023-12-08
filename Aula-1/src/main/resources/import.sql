@@ -1,0 +1,2 @@
+insert into tb_local(id, nome, rua, numero, bairro, cidade, estado, cep) values (1, 'buteco', 'rua 3', '2', 'alegria', 'dos bebum', 'SC','89080160');
+insert into tb_local(id, nome, rua, numero, bairro, cidade, estado, cep) values (2, 'cancha', 'rua 4', '2', 'alegria', 'dos bebum', 'SC','89080555');
