@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -25,8 +26,10 @@ public class Compromissos {
 	private Date data;
 	@Temporal(TemporalType.TIME)
 	private Time hora;
-	@OneToOne
+	@ManyToOne
 	private Contato contato;
+	@ManyToOne
+	private Local local;
 	
 	public long getId() {
 		return id;
@@ -58,6 +61,10 @@ public class Compromissos {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	
-	
+	public Local getLocal() {
+		return local;
+	}
+	public void setLocal(Local local) {
+		this.local = local;
+	}
 }

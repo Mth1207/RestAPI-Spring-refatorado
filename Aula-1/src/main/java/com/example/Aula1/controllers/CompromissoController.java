@@ -62,6 +62,7 @@ public class CompromissoController {
 			cp.setData(compromisso.getData());
 			cp.setHora(compromisso.getHora());
 			cp.setContato(compromisso.getContato());
+			cp.setLocal(compromisso.getLocal());
 
 			repo.save(cp);
 			return ResponseEntity.status(HttpStatus.OK).body(cp);
