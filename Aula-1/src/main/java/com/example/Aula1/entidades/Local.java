@@ -77,5 +77,4 @@ public class Local {
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
 }

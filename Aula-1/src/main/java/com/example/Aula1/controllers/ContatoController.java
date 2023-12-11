@@ -101,5 +101,4 @@ public class ContatoController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Contato não encontrado!");
 		}
 	}
-	
 }
