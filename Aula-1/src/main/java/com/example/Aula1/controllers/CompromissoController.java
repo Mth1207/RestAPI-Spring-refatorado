@@ -52,7 +52,7 @@ public class CompromissoController {
 	}
 	
 	@PutMapping("/{idcompromisso}")
-	public ResponseEntity<Object> alterar(@PathVariable("idlocal") Long idcompromisso,
+	public ResponseEntity<Object> alterar(@PathVariable("idcompromisso") Long idcompromisso,
 			@RequestBody Compromissos compromisso){
 		
 		Optional<Compromissos> opt = repo.findById(idcompromisso);
