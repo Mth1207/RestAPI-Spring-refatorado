@@ -9,14 +9,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name="tb_compromissos")
-public class Compromissos {
+public class Compromisso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
@@ -30,7 +29,9 @@ public class Compromissos {
 	private Contato contato;
 	@ManyToOne
 	private Local local;
+
 	
+
 	public long getId() {
 		return id;
 	}
@@ -67,4 +68,6 @@ public class Compromissos {
 	public void setLocal(Local local) {
 		this.local = local;
 	}
+
+	
 }
