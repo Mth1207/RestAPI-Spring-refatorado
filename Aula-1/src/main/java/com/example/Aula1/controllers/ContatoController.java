@@ -32,6 +32,7 @@ public class ContatoController {
 
 	@PostMapping
 	public ResponseEntity<Contato> salvar(@RequestBody Contato contato) {
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(contato));
 	}
 

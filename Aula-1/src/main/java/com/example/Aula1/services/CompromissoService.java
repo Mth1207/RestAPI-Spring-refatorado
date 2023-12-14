@@ -72,19 +72,19 @@ public class CompromissoService {
         return repo.save(cp);
     }
 
-    public List<Compromisso> pesquisarPorIntervaloData(Date dataInicio, Date dataFim) {
+    public List<Compromisso> pesquisarIntervalo(Date dataInicio, Date dataFim) {
         return repo.findByDataBetween(dataInicio, dataFim);
     }
 
-    public List<Compromisso> pesquisarPorContato(Long idContato) {
-		try {
-			ContatoService contatoService = new ContatoService();
-			Contato contato = contatoService.consultar(idContato);
-			return repo.findByContato(contato);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        return Collections.emptyList();
-    }
+//    public List<Compromisso> pesquisarPorContato(Long idContato) {
+//		try {
+//			ContatoService contatoService = new ContatoService();
+//			Contato contato = contatoService.consultar(idContato);
+//			return repo.findAllByContato(contato);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//        return Collections.emptyList();
+//    }
 
 }

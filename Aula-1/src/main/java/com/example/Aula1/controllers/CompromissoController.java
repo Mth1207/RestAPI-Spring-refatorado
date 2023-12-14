@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Aula1.entidades.Compromisso;
+import com.example.Aula1.entidades.Contato;
 import com.example.Aula1.entidades.StatusCompromisso;
 import com.example.Aula1.repositories.CompromissoRepository;
 import com.example.Aula1.services.CompromissoService;
+import com.example.Aula1.services.ContatoService;
 
 @RestController
 @RequestMapping("/compromissos")
@@ -34,6 +36,9 @@ public class CompromissoController {
 
 	@Autowired
 	CompromissoService service;
+	
+	@Autowired
+	ContatoService serviceContato;
 
 	@PostMapping
 	public ResponseEntity<Compromisso> salvar(@RequestBody Compromisso compromisso) {
@@ -70,19 +75,18 @@ public class CompromissoController {
         return ResponseEntity.status(HttpStatus.OK).body(compromissoAtualizado);
     }
     
-    @GetMapping("/pesquisar-por-intervalo-data")
+    @GetMapping("/pesquisar-por-intervalo")
     public ResponseEntity<List<Compromisso>> pesquisarPorIntervaloData(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFim) {
-        List<Compromisso> compromissos = service.pesquisarPorIntervaloData(dataInicio, dataFim);
+        List<Compromisso> compromissos = service.pesquisarIntervalo(dataInicio, dataFim);
         return ResponseEntity.status(HttpStatus.OK).body(compromissos);
     }
 
-    @GetMapping("/pesquisar-por-contato")
-    public ResponseEntity<List<Compromisso>> pesquisarPorContato(
-            @RequestParam Long idContato) {
-        List<Compromisso> compromissos = service.pesquisarPorContato(idContato);
-        return ResponseEntity.status(HttpStatus.OK).body(compromissos);
+    @GetMapping("/contato")
+    public ResponseEntity<List<Compromisso>> getAllByContato(@RequestParam("idcontato") Long id) {
+        Contato contato = serviceContato.consultar(id);
+        return ResponseEntity.status(HttpStatus.OK).body(repo.findAllByContato(contato));
     }
 	
 }

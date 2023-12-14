@@ -8,4 +8,5 @@ import com.example.Aula1.entidades.Contato;
 @Repository
 public interface ContatoRepository extends JpaRepository<Contato, Long>{
 	
+	Contato findByEmail(String email);
 }

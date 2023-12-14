@@ -18,7 +18,6 @@ public interface CompromissoRepository extends JpaRepository<Compromisso, Long>{
 	@Query("SELECT c FROM Compromisso c WHERE c.data BETWEEN :dataInicio AND :dataFim")
     List<Compromisso> findByDataBetween(@Param("dataInicio") Date dataInicio, @Param("dataFim") Date dataFim);
 	
-	List<Compromisso> findByContato(Contato contato);
-	
+	List<Compromisso> findAllByContato(Contato contato);
 	
 }

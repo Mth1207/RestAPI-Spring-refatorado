@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.Aula1.Exception.RecursoJaExistente;
 import com.example.Aula1.Exception.RecursoNaoEncontrado;
 import com.example.Aula1.Exception.ValidaDadosException;
 import com.example.Aula1.entidades.Contato;
@@ -24,6 +25,9 @@ public class ContatoService {
 	
 	public Contato salvar(Contato contato) {
 		validaCampos(contato);
+		if(repo.findByEmail(contato.getEmail()) != null) {
+			throw new RecursoJaExistente("Contato já cadastrado para este email");
+		}
 		return repo.save(contato);
 	}
 	
