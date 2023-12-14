@@ -1,10 +1,12 @@
 package com.example.Aula1.controllers;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.Aula1.entidades.Compromisso;
+import com.example.Aula1.entidades.StatusCompromisso;
 import com.example.Aula1.repositories.CompromissoRepository;
 import com.example.Aula1.services.CompromissoService;
 
@@ -57,4 +61,28 @@ public class CompromissoController {
 		service.excluir(idcompromisso);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
+	
+    @PutMapping("/{idcompromisso}/atualizar-status")
+    public ResponseEntity<Compromisso> atualizarStatus(
+            @PathVariable("idcompromisso") Long idcompromisso,
+            @RequestBody StatusCompromisso novoStatus) {
+        Compromisso compromissoAtualizado = service.atualizarStatus(idcompromisso, novoStatus);
+        return ResponseEntity.status(HttpStatus.OK).body(compromissoAtualizado);
+    }
+    
+    @GetMapping("/pesquisar-por-intervalo-data")
+    public ResponseEntity<List<Compromisso>> pesquisarPorIntervaloData(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataInicio,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date dataFim) {
+        List<Compromisso> compromissos = service.pesquisarPorIntervaloData(dataInicio, dataFim);
+        return ResponseEntity.status(HttpStatus.OK).body(compromissos);
+    }
+
+    @GetMapping("/pesquisar-por-contato")
+    public ResponseEntity<List<Compromisso>> pesquisarPorContato(
+            @RequestParam Long idContato) {
+        List<Compromisso> compromissos = service.pesquisarPorContato(idContato);
+        return ResponseEntity.status(HttpStatus.OK).body(compromissos);
+    }
+	
 }

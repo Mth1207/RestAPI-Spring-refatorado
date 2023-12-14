@@ -1,5 +1,8 @@
 package com.example.Aula1.services;
 
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.Aula1.Exception.RecursoNaoEncontrado;
 import com.example.Aula1.Exception.ValidaDadosException;
 import com.example.Aula1.entidades.Compromisso;
+import com.example.Aula1.entidades.Contato;
 import com.example.Aula1.entidades.StatusCompromisso;
 import com.example.Aula1.repositories.CompromissoRepository;
 
@@ -60,9 +64,27 @@ public class CompromissoService {
 		if(compromisso.getLocal() == null){
 			throw new ValidaDadosException("O local deve ser informado");
 		}
-		
-
 	}
 
+    public Compromisso atualizarStatus(Long idCompromisso, StatusCompromisso novoStatus) {
+        Compromisso cp = consultar(idCompromisso);
+        cp.setStatus(novoStatus);
+        return repo.save(cp);
+    }
+
+    public List<Compromisso> pesquisarPorIntervaloData(Date dataInicio, Date dataFim) {
+        return repo.findByDataBetween(dataInicio, dataFim);
+    }
+
+    public List<Compromisso> pesquisarPorContato(Long idContato) {
+		try {
+			ContatoService contatoService = new ContatoService();
+			Contato contato = contatoService.consultar(idContato);
+			return repo.findByContato(contato);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        return Collections.emptyList();
+    }
 
 }

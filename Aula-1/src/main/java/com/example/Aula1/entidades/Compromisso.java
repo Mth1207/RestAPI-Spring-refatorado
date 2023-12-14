@@ -5,6 +5,8 @@ import java.sql.Time;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,9 +31,17 @@ public class Compromisso {
 	private Contato contato;
 	@ManyToOne
 	private Local local;
+	@Enumerated(EnumType.STRING)
+	private StatusCompromisso status;
 
 	
 
+	public StatusCompromisso getStatus() {
+		return status;
+	}
+	public void setStatus(StatusCompromisso status) {
+		this.status = status;
+	}
 	public long getId() {
 		return id;
 	}
